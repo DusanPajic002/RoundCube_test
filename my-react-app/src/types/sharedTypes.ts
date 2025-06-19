@@ -2,12 +2,20 @@ export interface Message {
   id: string;
   message: string;
   name: string;
-  timestamp: Date;
+  time: Date;
 }
  
 export interface NewMessage {
   message: string;
   name: string;
+}
+
+export interface MessageTableResponse {
+    messages: Message[];
+    pageNumber: number;
+    pageSize: number;
+    totalData: number;
+    totalPages: number;
 }
 
 export interface TableHeader {

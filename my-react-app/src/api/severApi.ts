@@ -1,4 +1,4 @@
-import type { Message, NewMessage } from "../types/sharedTypes";
+import type {MessageTableResponse, NewMessage } from "../types/sharedTypes";
 import { backendApi } from "./axios";
 
 
@@ -16,9 +16,15 @@ export const postNewMessage = async (
         throw error;
     }
 }
-export const getAllMessages = async (): Promise<Message[]> => {
+
+export const getAllMessages = async (
+    pageNumber: number, 
+    pageSize: number
+): Promise<MessageTableResponse> => {
     try {
-        const response = await backendApi.get('/getAllMessages');
+        const response = await backendApi.get('/getAllMessages', {
+            params: { pageNumber, pageSize }
+        });
         console.log(response.data);
         return response.data;
     }
