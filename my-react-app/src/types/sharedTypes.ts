@@ -26,6 +26,11 @@ export interface TableHeader {
 export interface Table {
   header: TableHeader[];
   rows: TableRaw[];
+  pageNumber: number;
+  pageSize: number;
+  totalData: number;
+  totalPages: number;
+
 }
 
 export interface TableRaw {

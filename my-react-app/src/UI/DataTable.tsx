@@ -1,6 +1,9 @@
 import type {Table} from "../types/sharedTypes";
-
-export function DataTable(data: Table){
+interface TableProps {
+    data: Table; 
+}
+export function DataTable({ data }: TableProps)
+{
     return (
         <div>
             <table border={1} cellSpacing={0} cellPadding={5} style={{ width: '100%'}}>

@@ -2,16 +2,19 @@ import { useEffect, useState } from "react";
 import type { Message, MessageTableResponse, Table, TableHeader, TableRaw } from "../../types/sharedTypes";
 import { getAllMessages } from "../../api/severApi";
 import { DataTable } from "../../UI/DataTable";
+import { Pagination } from "../../UI/TablePagination";
 
 
 export default function MessageTable() {
 
+    const [headerColumns] = useState<string[]>(["MessageID", "User", "Message", "Time"]);
+    const [pageSizeList] = useState<number[]>([5, 10, 20]);
+
     const [messages, setMessages] = useState<Message[]>([]);
-    const [headerColumns, setHeaderColumns] = useState<string[]>(["MessageID", "User", "Message", "Time"]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageSize, setPageSize] = useState<number>(10);
+    const [pageSize, setPageSize] = useState<number>(pageSizeList[1]);
     const [totalPages, setTotalPages] = useState<number>(1);
 
 
@@ -55,9 +58,13 @@ export default function MessageTable() {
         return { id, columns };
     });
 
-    const tabela: Table = {
+    const table: Table = {
         header: tableHeaders,
         rows: raws,
+        pageNumber: currentPage,
+        pageSize: pageSize,
+        totalData: messages.length,
+        totalPages: totalPages,
     }
 
     if (error !== null) return <h1>{error}</h1>;
@@ -65,10 +72,28 @@ export default function MessageTable() {
     return (
         <div>
             {loading ? <p>Loading...</p> :
-                <div >
-                    <DataTable key={`${currentPage}-${pageSize}`} {...tabela} />
+                <div>
+                    <div >
+                    <DataTable 
+                    key={`${currentPage}-${pageSize}`} 
+                    data={table} 
+                    />
                 </div>
+                </div>
+                
             }
+            <Pagination 
+                table = {table}
+                currentPage = {currentPage}
+                totalPages = {totalPages}
+                onPageChange = {setCurrentPage}
+                pageSize = {pageSize}
+                pageSizeList = {pageSizeList}
+                onPageSizeChange = {(size) => {
+                    setPageSize(size);
+                    setCurrentPage(1); // reset na prvu stranicu kad se promeni page size
+                }}
+            />
         </div>
     );
 }
