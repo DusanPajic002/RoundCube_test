@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { postNewMessage } from '../../api/severApi';
 import { useEffect, useState } from 'react';
 import { TextInput } from '../ui/TextInput';
@@ -10,7 +9,6 @@ export default function MessagePage() {
   const [message, setMessage] = useState('');
   const [name, setName] = useState('');
   const [status, setStatus] = useState<Status>('idle');
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === 'sending') {
@@ -27,7 +25,6 @@ export default function MessagePage() {
       return;
     }
     setStatus('sending');
-    setError(null);
     try { 
       await postNewMessage(message.trim(), name.trim());
       setStatus('success');
@@ -36,10 +33,9 @@ export default function MessagePage() {
     } catch (err) {
       console.error('Error posting message:', err);
       setStatus('failed');
-      setError('Failed to post message.');
     }
   }
-  
+
   const renderStatusMessage = () => {
     switch (status) {
       case 'sending':

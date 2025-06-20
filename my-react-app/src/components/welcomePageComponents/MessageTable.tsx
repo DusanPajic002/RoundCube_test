@@ -19,8 +19,7 @@ export default function MessageTable() {
 
 
     useEffect(() => {
-        setMessages([{ id: "3", name: "Charlie", message: "Good morning!", time: new Date() }]);
-        //fetchMessages();
+        fetchMessages();
     }, [currentPage, pageSize]);
 
 
