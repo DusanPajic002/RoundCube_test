@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Message, MessageTableResponse, Table, TableHeader, TableRaw } from "../../types/sharedTypes";
+import type { Message, MessageTableResponse, Table, TableHeader, TableRaw } from "../../types/allTypes";
 import { getAllMessages } from "../../api/severApi";
-import { DataTable } from "../../UI/DataTable";
-import { Pagination } from "../../UI/TablePagination";
+import { DataTable } from "../ui/DataTable";
+import { Pagination } from "../ui/TablePagination";
 
 
 export default function MessageTable() {
@@ -91,7 +91,7 @@ export default function MessageTable() {
                 pageSizeList = {pageSizeList}
                 onPageSizeChange = {(size) => {
                     setPageSize(size);
-                    setCurrentPage(1); // reset na prvu stranicu kad se promeni page size
+                    setCurrentPage(1);
                 }}
             />
         </div>

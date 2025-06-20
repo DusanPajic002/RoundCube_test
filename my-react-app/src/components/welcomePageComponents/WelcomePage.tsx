@@ -1,16 +1,13 @@
-import LeaveMessage from './LeaveMessage';
+import NavigateButton from './NavigateButton';
 import MessageTable from './MessageTable';
 
 export default function WelcomePage() {
   return (
     <div>
-      <h1>See what people wrote about us and feel free to leave a message.</h1>
-      <div>
-        <MessageTable></MessageTable>
-      </div>
-      <div>
-        <LeaveMessage></LeaveMessage>
-      </div>
+      <h1>Guestbook</h1>
+      <p>See what people wrote about us and feel free to leave a message.</p>
+      <MessageTable></MessageTable>
+      <NavigateButton root="/leaveMessagePage" text="Leave a Message"></NavigateButton>
     </div>
   )
 }

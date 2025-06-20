@@ -1,4 +1,4 @@
-import type {MessageTableResponse, NewMessage } from "../types/sharedTypes";
+import type {MessageTableResponse, NewMessage } from "../types/allTypes";
 import { backendApi } from "./axios";
 
 

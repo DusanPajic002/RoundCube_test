@@ -1,4 +1,4 @@
-import type {Table} from "../types/sharedTypes";
+import type {Table} from "../../types/allTypes";
 interface TableProps {
     data: Table; 
 }
