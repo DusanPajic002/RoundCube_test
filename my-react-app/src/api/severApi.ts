@@ -1,14 +1,15 @@
-import type {MessageTableResponse, NewMessage } from "../types/allTypes";
+
+import type { MessageTableResponse, NewMessage } from "../components/types/allTypes";
 import { backendApi } from "./axios";
 
 
 export const postNewMessage = async (
     message: string, 
-    name: string
+    user: string, 
 ): Promise<NewMessage> => {
-    try {
-        const response = await backendApi.post('/newMessages', { message, name });
-        console.log(response.data);
+    try { 
+        
+        const response = await backendApi.post('/newMessages', { message, user}); 
         return response.data;
     }
     catch (error) {
@@ -22,9 +23,7 @@ export const getAllMessages = async (
     pageSize: number
 ): Promise<MessageTableResponse> => {
     try {
-        const response = await backendApi.get('/getAllMessages', {
-            params: { pageNumber, pageSize }
-        });
+        const response = await backendApi.get('/getAllMessages', { params: { pageNumber, pageSize } });
         console.log(response.data);
         return response.data;
     }

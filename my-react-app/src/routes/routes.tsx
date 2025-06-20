@@ -1,6 +1,6 @@
     import { Navigate, Route, Routes } from "react-router-dom" 
-    import WelcomePage from "../components/welcomePageComponents/WelcomePage"
-    import MessagePage from "../components/messagePageComponents/MessagePage"
+    import WelcomePage from "../components/pages/welcomePageComponents/WelcomePage"
+    import MessagePage from "../components/pages/messagePageComponents/MessagePage"
 
     export const AppRoutes = () => {
         return (

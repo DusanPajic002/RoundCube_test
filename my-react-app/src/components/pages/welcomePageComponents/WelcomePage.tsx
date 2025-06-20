@@ -1,4 +1,5 @@
-import NavigateButton from './NavigateButton';
+
+import NavigateButton from '../../ui/NavigateButton';
 import MessageTable from './MessageTable';
 
 export default function WelcomePage() {

@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const { sequelize } = require('./models');
+const { sequelize } = require('../models');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const messageRoutes = require('./routes/message-routes.js');
+const messageRoutes = require('../routes/message-routes.js');
 app.use('/api', messageRoutes);
 
 app.get('/', (req, res) => {

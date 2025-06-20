@@ -1,7 +1,7 @@
-import { postNewMessage } from '../../api/severApi';
+import { postNewMessage } from '../../../api/severApi';
 import { useEffect, useState } from 'react';
-import { TextInput } from '../ui/TextInput';
-import NavigateButton from '../welcomePageComponents/NavigateButton';
+import { TextInput } from '../../ui/TextInput';
+import NavigateButton from '../../ui/NavigateButton';
 
 type Status = 'idle' | 'sending' | 'success' | 'failed';
 

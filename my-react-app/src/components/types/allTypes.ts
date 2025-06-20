@@ -1,13 +1,13 @@
 export interface Message {
   id: string;
   message: string;
-  name: string;
-  time: Date;
+  user: string;
+  createdAt: Date;
 }
  
 export interface NewMessage {
   message: string;
-  name: string;
+  user: string;
 }
 
 export interface MessageTableResponse {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Message, MessageTableResponse, Table, TableHeader, TableRaw } from "../../types/allTypes";
-import { getAllMessages } from "../../api/severApi";
-import { DataTable } from "../ui/DataTable";
-import { Pagination } from "../ui/TablePagination";
+import { getAllMessages } from "../../../api/severApi";
+import { DataTable } from "../../ui/DataTable";
+import { Pagination } from "../../ui/TablePagination";
 
 
 export default function MessageTable() {
@@ -21,19 +21,33 @@ export default function MessageTable() {
     useEffect(() => {
         fetchMessages();
     }, [currentPage, pageSize]);
+    /*
+    const page = parseInt(req.query.page, 10) || 1;
+    const size = parseInt(req.query.size, 10) || 10; 
+    const limit = size;
+    const offset = (page - 1) * size;
+    const { count, rows } = await Message.findAndCountAll({
+      limit,
+      offset,
+    });
+    
+    res.status(200).json({
+      status: 'success',
+      totalPages: Math.ceil(count / limit),
+      messages: rows,
+    });
+    */
 
-
-    const fetchMessages = async () => {
-        console.log("Fetching portfolio data");
+    const fetchMessages = async () => { 
         setLoading(true);
         setError(null);
         try {
-            const response: MessageTableResponse = await getAllMessages(currentPage, pageSize);
-            setMessages(response.messages);
+            const response: MessageTableResponse = await getAllMessages(currentPage, pageSize); 
+            setMessages(response.messages? response.messages : []);
             setTotalPages(response.totalPages);
-            console.log("Fetched messages:", response.messages);
+           // console.log("Fetched messages:", response.messages);
         } catch (err) {
-            console.log(err);
+            console.log(err + "sdadsadsads"); 
             setError("Failed to fetch messages");
         } finally {
             setLoading(false);
@@ -46,13 +60,13 @@ export default function MessageTable() {
         headerText: col,
     }));
 
-    const raws: TableRaw[] = messages.map((message, i) => {
+     const raws: TableRaw[] = messages.map((message, i) => {
         const id = ((currentPage - 1) * pageSize + i + 1).toString();
         const columns = [
             { data: message.id },
-            { data: message.name },
+            { data: message.user },
             { data: message.message },
-            { data: new Date(message.time).toLocaleString() },
+            { data: new Date(message.createdAt).toLocaleString() },
         ];
         return { id, columns };
     });

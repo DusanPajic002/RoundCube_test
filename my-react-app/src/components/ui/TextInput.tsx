@@ -1,4 +1,3 @@
-
 interface TextInputProps {
     labelText: string;
     text: string;

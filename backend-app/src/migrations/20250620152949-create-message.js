@@ -12,7 +12,7 @@ module.exports = {
       message: {
         type: Sequelize.TEXT
       },
-      name: {
+      user: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

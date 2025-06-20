@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const messageController = require('../controllers/message.controller');
+const messageController = require('../controller/message.controller');
 
 
-router.post('/postNewMessage', messageController.createMessage);
+router.post('/newMessages', messageController.createMessage);
 router.get('/getAllMessages', messageController.getMessages);
 
 module.exports = router;

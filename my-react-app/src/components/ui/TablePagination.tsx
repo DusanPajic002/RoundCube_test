@@ -1,4 +1,5 @@
-import type { Table } from "../../types/allTypes";
+import type { Table } from "../types/allTypes";
+
 
 interface PaginationProps {
     table: Table;
