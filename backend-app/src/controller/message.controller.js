@@ -10,7 +10,6 @@ exports.createMessage = async (req, res) => {
   try {
     const { error, value } = messageSchema.validate(req.body);
 
-    console.log('Error creating message:', req);
     if (error) {
       return res.status(400).json({ status: 'failed', message: error.details[0].message });
     }

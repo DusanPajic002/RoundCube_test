@@ -7,7 +7,7 @@ import { Pagination } from "../../ui/TablePagination";
 
 export default function MessageTable() {
 
-    const [headerColumns] = useState<string[]>(["MessageID", "User", "Message", "Time"]);
+    const [headerColumns] = useState<string[]>(["*","MessageID", "User", "Message", "Time"]);
     const [pageSizeList] = useState<number[]>([5, 10, 20]);
 
     const [messages, setMessages] = useState<Message[]>([]);
@@ -21,22 +21,6 @@ export default function MessageTable() {
     useEffect(() => {
         fetchMessages();
     }, [currentPage, pageSize]);
-    /*
-    const page = parseInt(req.query.page, 10) || 1;
-    const size = parseInt(req.query.size, 10) || 10; 
-    const limit = size;
-    const offset = (page - 1) * size;
-    const { count, rows } = await Message.findAndCountAll({
-      limit,
-      offset,
-    });
-    
-    res.status(200).json({
-      status: 'success',
-      totalPages: Math.ceil(count / limit),
-      messages: rows,
-    });
-    */
 
     const fetchMessages = async () => { 
         setLoading(true);
@@ -45,9 +29,7 @@ export default function MessageTable() {
             const response: MessageTableResponse = await getAllMessages(currentPage, pageSize); 
             setMessages(response.messages? response.messages : []);
             setTotalPages(response.totalPages);
-           // console.log("Fetched messages:", response.messages);
-        } catch (err) {
-            console.log(err + "sdadsadsads"); 
+        } catch (err) { 
             setError("Failed to fetch messages");
         } finally {
             setLoading(false);
@@ -62,7 +44,7 @@ export default function MessageTable() {
 
      const raws: TableRaw[] = messages.map((message, i) => {
         const id = ((currentPage - 1) * pageSize + i + 1).toString();
-        const columns = [
+        const columns = [ 
             { data: message.id },
             { data: message.user },
             { data: message.message },

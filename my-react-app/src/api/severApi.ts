@@ -23,8 +23,7 @@ export const getAllMessages = async (
     pageSize: number
 ): Promise<MessageTableResponse> => {
     try {
-        const response = await backendApi.get('/getAllMessages', { params: { pageNumber, pageSize } });
-        console.log(response.data);
+        const response = await backendApi.get('/getAllMessages', { params: { pageNumber, pageSize } }); 
         return response.data;
     }
     catch (error) {

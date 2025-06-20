@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Database connection has been established successfully.');
 
     app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
