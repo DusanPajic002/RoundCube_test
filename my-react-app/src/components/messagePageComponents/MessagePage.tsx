@@ -11,10 +11,13 @@ export default function MessagePage() {
   const [name, setName] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
-    // Reset status when component mounts
-    setStatus('idle');
-  }, []);
+    if (status === 'sending') {
+      const timeout = setTimeout(() => "", 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [status]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,9 +28,7 @@ export default function MessagePage() {
     }
     setStatus('sending');
     setError(null);
-    try {
-      setTimeout(() => {
-      }, 0);
+    try { 
       await postNewMessage(message.trim(), name.trim());
       setStatus('success');
       setMessage('');
@@ -38,6 +39,7 @@ export default function MessagePage() {
       setError('Failed to post message.');
     }
   }
+  
   const renderStatusMessage = () => {
     switch (status) {
       case 'sending':
@@ -55,6 +57,7 @@ export default function MessagePage() {
     <div>
       <h1>Leave a Message</h1>
       <form onSubmit={handleSubmit}>
+
         <TextInput
           labelText="Name"
           text={name}
@@ -63,16 +66,20 @@ export default function MessagePage() {
         <TextInput
           labelText="Message"
           text={message}
-          setText={setMessage} />
+          setText={setMessage}
+        />
+
         <div>
           <button type="submit" disabled={status === 'sending'}> Post </button>
         </div>
+
       </form>
 
       {renderStatusMessage()}
+
       <hr />
-      
       <NavigateButton root="/welcomePage" text="Back to Guestbook"></NavigateButton>
+
     </div>
   );
 };
