@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const { sequelize } = require('../models');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 
 app.use(helmet());
 app.use(cors());

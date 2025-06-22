@@ -3,6 +3,7 @@ import type { MessageTableResponse, NewMessage } from "../components/types/allTy
 import { backendApi } from "./axios";
 
 
+// Function to post a new message
 export const postNewMessage = async (
     message: string, 
     user: string, 
@@ -18,6 +19,7 @@ export const postNewMessage = async (
     }
 }
 
+//// Function to fetch all messages with pagination
 export const getAllMessages = async (
     pageNumber: number, 
     pageSize: number

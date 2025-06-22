@@ -6,8 +6,12 @@ import NavigateButton from '../../ui/NavigateButton';
 type Status = 'idle' | 'sending' | 'success' | 'failed';
 
 export default function MessagePage() {
+
+  // State variables to manage the message 
   const [message, setMessage] = useState('');
+  // State variable to manage the name
   const [name, setName] = useState('');
+  // State variable to manage the status of the message submission
   const [status, setStatus] = useState<Status>('idle');
 
   useEffect(() => {
@@ -17,6 +21,7 @@ export default function MessagePage() {
     }
   }, [status]);
 
+  // Function to handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -36,6 +41,7 @@ export default function MessagePage() {
     }
   }
 
+  // Function to render the status message based on the current status
   const renderStatusMessage = () => {
     switch (status) {
       case 'sending':
@@ -48,6 +54,7 @@ export default function MessagePage() {
         return null;
     }
   };
+
 
   return (
     <div>

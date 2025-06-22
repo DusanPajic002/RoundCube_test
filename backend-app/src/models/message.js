@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
     }
   }
   Message.init({
-    id: {
+    id: { // Primary Key
       type: DataTypes.INTEGER, 
       primaryKey: true,
       autoIncrement: true,
