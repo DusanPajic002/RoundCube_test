@@ -1,6 +1,8 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
+
+// Message model definition
 module.exports = (sequelize) => {
   class Message extends Model {
     static associate(models) {

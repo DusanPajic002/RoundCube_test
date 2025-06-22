@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # Database Service (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: guestbook-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      # Expose port 3307 on the host
+      - "3307:3306"
+    volumes:
+      # Persist database data
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Service
+  backend:
+    build:
+      context: ./backend-app
+      dockerfile: Dockerfile
+    container_name: guestbook-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DB_HOST=db         
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_DIALECT=mysql
+      - NODE_ENV=development
+    depends_on:
+      db:
+        condition: service_healthy 
+    volumes:
+      - ./backend-app:/usr/src/app
+      - /usr/src/app/node_modules
+
+  # Frontend Service (React)
+  frontend:
+    build:
+      context: ./my-react-app
+      dockerfile: Dockerfile
+      args:
+        # The frontend is accessed from your browser, so it should point to localhost
+        VITE_BACKEND_API: http://localhost:8080
+    container_name: guestbook-frontend
+    restart: always
+    ports:
+      - "9000:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

@@ -19,7 +19,7 @@ export const postNewMessage = async (
     }
 }
 
-//// Function to fetch all messages with pagination
+// Function to fetch all messages with pagination
 export const getAllMessages = async (
     pageNumber: number, 
     pageSize: number
